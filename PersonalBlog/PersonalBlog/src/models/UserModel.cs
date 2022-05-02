@@ -20,6 +20,7 @@ namespace PersonalBlog.src.models
 
         [Required, StringLength(30)]
         public string Password { get; set; }
+
         public string Photograph { get; set; }
 
         [JsonIgnore]
