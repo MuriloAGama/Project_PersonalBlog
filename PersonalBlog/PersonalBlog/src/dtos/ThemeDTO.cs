@@ -28,11 +28,15 @@ namespace PersonalBlog.src.dtos
     /// </summary>
     public class UpdateThemeDTO
     {
+        [Required]
+        public int Id { get; set; }
+
         [Required, StringLength(50)]
         public string Description { get; set; }
 
-        public UpdateThemeDTO(string description)
+        public UpdateThemeDTO(int id ,string description)
         {
+            Id = id;
             Description = description;
         }
     }

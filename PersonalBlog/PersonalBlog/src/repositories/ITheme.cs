@@ -18,8 +18,11 @@ namespace PersonalBlog.src.repositories
 
             ThemeModel GetThemeById(int id);
             List<ThemeModel> GetThemeByDescription(string description);
-            
-        }
+            List<ThemeModel> GetAllThemes();
+
+
+
     }
+}
 
 

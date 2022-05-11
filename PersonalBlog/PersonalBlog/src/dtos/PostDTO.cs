@@ -10,6 +10,7 @@ namespace PersonalBlog.src.dtos
     /// </summary>
     public class NewPostDTO
     {
+        
         [Required, StringLength(50)]
         public string Title { get; set; }
 
@@ -42,6 +43,9 @@ namespace PersonalBlog.src.dtos
     /// </summary>
     public class UpDatePostDTO
     {
+        [Required]
+        public int Id { get; set; }
+
         [Required, StringLength(50)]
         public string Title { get; set; }
 
@@ -53,8 +57,9 @@ namespace PersonalBlog.src.dtos
         [Required]
         public string ThemeDescription { get; set; }
 
-        public UpDatePostDTO(string title, string description, string photograph, string themeDescription)
+        public UpDatePostDTO(int id, string title, string description, string photograph, string themeDescription)
         {
+            Id = id;
             Title = title;
             Description = description;
             Photograph = photograph;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PersonalBlog.src.utilities;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
@@ -23,7 +24,11 @@ namespace PersonalBlog.src.models
 
         public string Photograph { get; set; }
 
-        [JsonIgnore]
+        [Required]
+        public TypeUser Type { get; set; }
+
+
+        [JsonIgnore, InverseProperty("Creator")]
         public List<PostModel> MyPosts { get; set; }
     }
 }

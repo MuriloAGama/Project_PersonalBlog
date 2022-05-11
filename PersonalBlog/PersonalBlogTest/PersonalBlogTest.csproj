@@ -19,4 +19,8 @@
     <ProjectReference Include="..\PersonalBlog\PersonalBlog.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tests\TestResults\" />
+  </ItemGroup>
+
 </Project>

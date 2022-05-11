@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PersonalBlog.src.data;
+using PersonalBlog.src.repositories;
+using PersonalBlog.src.repositories.implementations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,22 +36,32 @@ namespace PersonalBlog
                 .Build();
             services.AddDbContext<PersonalBlogContext>(options => options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
+            //Repositories
+            services.AddScoped<IUser, UserRepository>();
+            services.AddScoped<ITheme, ThemeRepository>();
+            services.AddScoped<IPost, PostRepository>();
+
             //Configuração do controlador
+            services.AddCors();
             services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PersonalBlogContext contexto)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PersonalBlogContext context)
         {
             if (env.IsDevelopment())
             {
-                contexto.Database.EnsureCreated();
+                context.Database.EnsureCreated();
                 app.UseDeveloperExceptionPage();
             }
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseCors(c => c
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
 
             app.UseEndpoints(endpoints =>
             {

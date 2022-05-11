@@ -1,0 +1,351 @@
+{
+	"variables": [],
+	"info": {
+		"name": "BlogPessoal",
+		"_postman_id": "3c8374b6-1c3b-38fc-573a-c9816b18d007",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UsuarioControlador",
+			"description": "",
+			"item": [
+				{
+					"name": "PegarUsuarioPeloId",
+					"request": {
+						"url": "localhost:5000/api/Usuarios/id/{idUsuario}",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "PegarUsuariosPeloNome",
+					"request": {
+						"url": {
+							"raw": "localhost:5000/api/Usuarios?nomeUsuario=",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Usuarios"
+							],
+							"query": [
+								{
+									"key": "nomeUsuario",
+									"value": "",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "PegarUsuarioPeloEmail",
+					"request": {
+						"url": "localhost:5000/api/Usuarios/email/{emailUsuario}",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "NovoUsuario",
+					"request": {
+						"url": "localhost:5000/api/Usuarios",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"nome\": \"\",\r\n   \"email\": \"\",\r\n   \"senha\": \"\",\r\n   \"foto\": \"\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "AtualizarUsuario",
+					"request": {
+						"url": "localhost:5000/api/Usuarios",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"id\": 0,\r\n\t\"nome\": \"\",\r\n\t\"senha\": \"\",\r\n\t\"foto\": \"\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "DeletarUsuario",
+					"request": {
+						"url": "localhost:5000/api/Usuarios/deletar/{idUsuario}",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TemaControlador",
+			"description": "",
+			"item": [
+				{
+					"name": "PegarTodosTemas",
+					"request": {
+						"url": "localhost:5000/api/Temas",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "PegarTemaPeloId",
+					"request": {
+						"url": "localhost:5000/api/Temas/id/{idTema}",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "PegarTemasPelaDescricao",
+					"request": {
+						"url": {
+							"raw": "localhost:5000/api/theme/search?descricaoTema=",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"theme",
+								"search"
+							],
+							"query": [
+								{
+									"key": "descricaoTema",
+									"value": "",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "NovoTema",
+					"request": {
+						"url": "localhost:5000/api/Temas",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"descricao\": \"\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "AtualizarTema",
+					"request": {
+						"url": "localhost:5000/api/Temas",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 0,\n    \"descricao\": \"\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "DeletarTema",
+					"request": {
+						"url": "localhost:5000/api/Temas/deletar/{idTema}",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PostagemControlador",
+			"description": "",
+			"item": [
+				{
+					"name": "PegarPostagemPeloId",
+					"request": {
+						"url": "localhost:5000/api/Postagens/id/{idPostagem}",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "PegarTodasPostagens",
+					"request": {
+						"url": "localhost:5000/api/Postagens",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "PegarPostagensPorPesquisa",
+					"request": {
+						"url": {
+							"raw": "localhost:5000/api/Postagens?titulo=&descricaoTema=&nomeCriador=",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Postagens"
+							],
+							"query": [
+								{
+									"key": "titulo",
+									"value": "",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "descricaoTema",
+									"value": "",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "nomeCriador",
+									"value": "",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "NovaPostagem",
+					"request": {
+						"url": "localhost:5000/api/Postagens",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"titulo\": \"\",\n\t\"descricao\":\"\",\n\t\"foto\":\"\",\n\t\"emailCriador\":\"\",\n\t\"descricaoTema\":\"\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "AtualizarPostagem",
+					"request": {
+						"url": "localhost:5000/api/Postagens",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 0,\n\t\"titulo\": \"\",\n\t\"descricao\":\"\",\n\t\"foto\":\"\",\n\t\"emailCriador\":\"\",\n\t\"descricaoTema\":\"\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "DeletarPostagem",
+					"request": {
+						"url": "localhost:5000/api/Postagens/deletar/{idPostagem}",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
