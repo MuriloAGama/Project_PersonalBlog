@@ -1,6 +1,7 @@
 ﻿using PersonalBlog.src.dtos;
 using PersonalBlog.src.models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PersonalBlog.src.repositories
 {
@@ -12,12 +13,12 @@ namespace PersonalBlog.src.repositories
     /// </summary>
     public interface IPost
     {
-        void NewPost(NewPostDTO post);
-        void AttPost(UpDatePostDTO post);
-        void DeletePost(int id);
-        PostModel GetPostById(int id);
-        List<PostModel> GetAllPosts();
-        List<PostModel> GetPostsBySearch(string title, string themeDescription, string nameCreator);
+        Task NewPostAsync(NewPostDTO post);
+        Task AttPostAsync(UpDatePostDTO post);
+        Task DeletePostAsync(int id);
+        Task<PostModel> GetPostByIdAsync(int id);
+        Task<List<PostModel>> GetAllPostsAsync();
+        Task<List<PostModel>> GetPostsBySearchAsync(string title, string themeDescription, string nameCreator);
 
     }
 }

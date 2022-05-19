@@ -4,9 +4,16 @@ using PersonalBlog.src.dtos;
 using PersonalBlog.src.models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PersonalBlog.src.repositories.implementations
 {
+    /// <summary>
+    /// <para>Resumo: Classe responsavel por implementar IPostagem</para>
+    /// <para>Criado por: Murilo Gama</para>
+    /// <para>Versão: 1.0</para>
+    /// <para>Data: 12/05/2022</para>
+    /// </summary>
 
     public class PostRepository : IPost
     {
@@ -26,107 +33,135 @@ namespace PersonalBlog.src.repositories.implementations
 
         #region Methods
 
-        public void AttPost(UpDatePostDTO post)
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para atualizar uma postagem</para>
+        /// </summary>
+        /// <param name="post">AtualizarPostagemDTO</param>
+        
+        public async Task AttPostAsync(UpDatePostDTO post)
         {
-            var existingPost = GetPostById(post.Id);
+            var existingPost = await GetPostByIdAsync(post.Id);
             existingPost.Title = post.Title;
             existingPost.Description = post.Description;
             existingPost.Photograph = post.Photograph;
             existingPost.Theme = _context.Themes.FirstOrDefault(
             t => t.Description == post.ThemeDescription);
 
-            _context.Posts.Update(existingPost);
-            _context.SaveChanges();
+             _context.Posts.Update(existingPost);
+            await _context.SaveChangesAsync();
         }
 
-        public void DeletePost(int id)
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para deletar uma postagem</para>
+        /// </summary>
+        /// <param name="id">Id da postagem</param>
+        /// 
+        public async Task DeletePostAsync(int id)
         {
-            _context.Posts.Remove(GetPostById(id));
-            _context.SaveChanges();
+             _context.Posts.Remove(await GetPostByIdAsync(id));
+            await _context.SaveChangesAsync();
 
         }
 
-        public List<PostModel> GetAllPosts()
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para pegar todas postagens</para>
+        /// </summary>
+        /// <return>Lista PostagemModelo></return>
+        public async Task<List<PostModel>> GetAllPostsAsync()
         {
-            return _context.Posts.ToList();
-            return _context.Posts
+            return await _context.Posts
            .Include(p => p.Creator)
            .Include(p => p.Theme)
-           .ToList();
+           .ToListAsync();
 
         }
 
-        public PostModel GetPostById(int id)
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para pegar uma postagem pelo Id</para>
+        /// </summary>
+        /// <param name="id">Id da postagem</param>
+        /// <return>PostagemModelo</return>
+        public async Task<PostModel> GetPostByIdAsync(int id)
         {
-            return _context.Posts.FirstOrDefault(p => p.Id == id);
+            return await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
 
         }
 
-        public List<PostModel> GetPostsBySearch(string title, string themeDescription, string nameCreator)
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para pegar pegar postagens por pesquisa</para>
+        /// </summary>
+        /// <param name="title">Post title </param>
+        /// <param name="themeDescription">Theme Description</param>
+        /// <param name="nameCreator">Creator name</param>
+        /// <return>List PostModel</return>
+        public async Task<List<PostModel>> GetPostsBySearchAsync(string title, string themeDescription, string nameCreator)
         {
             switch (title, themeDescription, nameCreator)
             {
                 case (null, null, null):
-                    return GetAllPosts();
+                    return await GetAllPostsAsync();
                 case (null, null, _):
-                    return _context.Posts
+                    return await _context.Posts
                     .Include(p => p.Theme)
                     .Include(p => p.Creator)
                     .Where(p => p.Creator.Name.Contains(nameCreator))
-                    .ToList();
+                    .ToListAsync();
                 case (null, _, null):
-                    return _context.Posts
+                    return await _context.Posts
                     .Include(p => p.Theme)
                     .Include(p => p.Creator)
                     .Where(p => p.Theme.Description.Contains(themeDescription))
-                    .ToList();
+                    .ToListAsync();
                 case (_, null, null):
-                    return _context.Posts
+                    return await _context.Posts
                     .Include(p => p.Theme)
                     .Include(p => p.Creator)
                     .Where(p => p.Title.Contains(title))
-                    .ToList();
+                    .ToListAsync();
                 case (_, _, null):
-                    return _context.Posts
+                    return await _context.Posts
                     .Include(p => p.Theme)
                     .Include(p => p.Creator)
                     .Where(p =>
                     p.Title.Contains(title) &
                     p.Theme.Description.Contains(themeDescription))
-                    .ToList();
+                    .ToListAsync();
                 case (null, _, _):
-                    return _context.Posts
+                    return await _context.Posts
                     .Include(p => p.Theme)
                     .Include(p => p.Creator)
                     .Where(p =>
                     p.Theme.Description.Contains(themeDescription) &
                     p.Creator.Name.Contains(nameCreator))
-                    .ToList();
+                    .ToListAsync();
                 case (_, null, _):
-                    return _context.Posts
+                    return await _context.Posts
                     .Include(p => p.Theme)
                     .Include(p => p.Creator)
                     .Where(p =>
                     p.Title.Contains(title) &
                     p.Creator.Name.Contains(nameCreator))
-                    .ToList();
+                    .ToListAsync();
                 case (_, _, _):
-                    return _context.Posts
+                    return await _context.Posts
                     .Include(p => p.Theme)
                     .Include(p => p.Creator)
                     .Where(p =>
                     p.Title.Contains(title) |
                     p.Theme.Description.Contains(themeDescription) |
                     p.Creator.Name.Contains(nameCreator))
-                    .ToList();
+                    .ToListAsync();
             }
         }
 
 
-
-        public void NewPost(NewPostDTO post)
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para salvar uma nova postagem</para>
+        /// </summary>
+        /// <param name="post">NewPostDTO</param>
+        public async Task NewPostAsync (NewPostDTO post)
         {
-            _context.Posts.Add(new PostModel
+            await _context.Posts.AddAsync(new PostModel
             {
                 Title = post.Title,
                 Description = post.Description,
@@ -134,7 +169,7 @@ namespace PersonalBlog.src.repositories.implementations
                 Creator = _context.Users.FirstOrDefault(u => u.Email == post.EmailCreator),
                 Theme = _context.Themes.FirstOrDefault(t => t.Description == post.ThemeDescription)
             });
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
 
         #endregion Methods

@@ -1,8 +1,10 @@
-﻿using PersonalBlog.src.data;
+﻿using Microsoft.EntityFrameworkCore;
+using PersonalBlog.src.data;
 using PersonalBlog.src.dtos;
 using PersonalBlog.src.models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PersonalBlog.src.repositories.implementations
 {
@@ -24,49 +26,49 @@ namespace PersonalBlog.src.repositories.implementations
         #endregion Constructor
 
         #region Method
-        public void AddTheme(NewThemeDTO newTheme)
+        public async Task AddThemeAsync(NewThemeDTO newTheme)
         {
-            _context.Themes.Add(new ThemeModel
+            await _context.Themes.AddAsync(new ThemeModel
             {
                 Description = newTheme.Description
 
             });
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void AttTheme(UpdateThemeDTO newTheme)
+        public async Task AttThemeAsync(UpdateThemeDTO newTheme)
         {
-            var existingTheme = GetThemeById(newTheme.Id);
+            var existingTheme = await GetThemeByIdAsync(newTheme.Id);
             existingTheme.Description = newTheme.Description;
             _context.Themes.Update(existingTheme);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
         }
 
-        public void DeleteTheme(int id)
+        public async Task DeleteThemeAsync(int id)
         {
-            _context.Themes.Remove(GetThemeById(id));
-            _context.SaveChanges();
+            _context.Themes.Remove(await GetThemeByIdAsync(id));
+            await _context.SaveChangesAsync();
 
         }
 
-        public List<ThemeModel> GetAllThemes()
+        public async Task<List<ThemeModel>> GetAllThemesAsync()
         {
-            return _context.Themes
-                    .ToList();
+            return await _context.Themes
+                    .ToListAsync();
         }
 
-        public List<ThemeModel> GetThemeByDescription(string description)
+        public async Task<List<ThemeModel>> GetThemeByDescriptionAsync(string description)
         {
-            return _context.Themes
+            return await _context.Themes
             .Where(t => t.Description.Contains(description))
-            .ToList();
+            .ToListAsync();
         }
 
-        public ThemeModel GetThemeById(int id)
+        public async Task<ThemeModel> GetThemeByIdAsync(int id)
         {
-            return _context.Themes.FirstOrDefault(p => p.Id == id);
+            return await _context.Themes.FirstOrDefaultAsync(p => p.Id == id);
 
         }
     }

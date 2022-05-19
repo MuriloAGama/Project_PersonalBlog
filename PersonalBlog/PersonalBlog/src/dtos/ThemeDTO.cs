@@ -12,7 +12,6 @@ namespace PersonalBlog.src.dtos
     { 
         [Required, StringLength(50)]
         public string Description { get; set; }
-
         public NewThemeDTO(string description)
         {
             Description = description;

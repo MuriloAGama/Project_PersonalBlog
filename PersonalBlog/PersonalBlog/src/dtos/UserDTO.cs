@@ -57,8 +57,9 @@ namespace PersonalBlog.src.dtos
 
  
 
-        public UpdateUserDTO(string name, string password, string photograph)
+        public UpdateUserDTO(int id, string name, string password, string photograph)
         {
+            Id = id;
             Name = name;
             Password = password;
             Photograph = photograph;

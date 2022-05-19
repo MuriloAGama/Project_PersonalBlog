@@ -8,6 +8,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PersonalBlog.src.servicos.implementations
 {
@@ -36,13 +37,13 @@ namespace PersonalBlog.src.servicos.implementations
 
         }
 
-        public void CreateUserNotDuplicate(NewUserDTO dto)
+        public async Task CreateUserNotDuplicateAsync(NewUserDTO dto)
         {
 
-            var user = _repository.GetUserByEmail(dto.Email);
+            var user = await _repository.GetUserByEmailAsync(dto.Email);
             if (user != null) throw new Exception("This email is already being used");
             dto.Password = EncodePassword(dto.Password);
-            _repository.AddUser(dto);
+            await _repository.AddUserAsync(dto);
         }
 
 
@@ -69,9 +70,9 @@ namespace PersonalBlog.src.servicos.implementations
             return tokenManipulator.WriteToken(token);
         }
 
-        public AuthorizationDTO GetAuthorization(AuthenticationDTO authentication)
+        public async Task <AuthorizationDTO> GetAuthorizationAsync(AuthenticationDTO authentication)
         {
-            var user = _repository.GetUserByEmail(authentication.Email);
+            var user = await _repository.GetUserByEmailAsync(authentication.Email);
             if (user == null) throw new Exception("Use not found");
             if (user.Password != EncodePassword(authentication.Password)) throw new
             Exception("Incorrect password");

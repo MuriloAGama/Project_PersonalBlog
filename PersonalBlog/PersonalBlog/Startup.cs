@@ -29,7 +29,7 @@ namespace PersonalBlog
         public void ConfigureServices(IServiceCollection services)
         {
 
-            //Configuração do banco de dados
+            //Database configuration
             IConfigurationRoot config = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("appsettings.json")
@@ -41,7 +41,7 @@ namespace PersonalBlog
             services.AddScoped<ITheme, ThemeRepository>();
             services.AddScoped<IPost, PostRepository>();
 
-            //Configuração do controlador
+            //Controller configuration
             services.AddCors();
             services.AddControllers();
         }

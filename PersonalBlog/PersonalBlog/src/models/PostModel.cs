@@ -3,6 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PersonalBlog.src.models
 {
+    /// <summary>
+    /// <para>Resumo: Classe responsavel por representar tb_postagens no banco.</para>
+    /// <para>Criado por: Gustavo Boaz</para>
+    /// <para>Versão: 1.0</para>
+    /// <para>Data: 12/05/2022</para>
+    /// </summary>
+    
     [Table("tb_posts")]
     public class PostModel
     {
@@ -19,7 +26,7 @@ namespace PersonalBlog.src.models
         public string Photograph { get; set; }
 
         [ForeignKey("fk_user")]
-        //Creator é o criador da postagem se refere a tabela User
+ 
         public UserModel Creator { get; set; }
 
         [ForeignKey("fk_theme")]

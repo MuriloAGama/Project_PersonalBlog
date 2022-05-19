@@ -12,7 +12,7 @@ namespace PersonalBlogTest.Tests.data
         private PersonalBlogContext _context;
 
         [TestInitialize]
-        public void inicio()
+        public void Inicio()
         {
             var opt = new DbContextOptionsBuilder<PersonalBlogContext>()
                 .UseInMemoryDatabase(databaseName: "db_personalblog")
@@ -22,7 +22,7 @@ namespace PersonalBlogTest.Tests.data
         }
 
         [TestMethod]
-        public void InserirNovoUsuarioNoBancoRetornarUsuario()
+        public void InsertNewUserInTheBankReturnUser()
         {
             UserModel user = new UserModel();
 
