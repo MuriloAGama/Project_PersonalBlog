@@ -28,14 +28,15 @@ namespace PersonalBlog.src.repositories.implementations
 
         #region Methods
 
-        public async Task AddUserAsync(NewUserDTO newUsuario)
+        public async Task AddUserAsync(NewUserDTO newUser)
         {
             await _context.Users.AddAsync(new UserModel
             {
-                Email = newUsuario.Email,
-                Name = newUsuario.Name,
-                Password = newUsuario.Password,
-                Photograph = newUsuario.Photograph,
+                Email = newUser.Email,
+                Name = newUser.Name,
+                Password = newUser.Password,
+                Photograph = newUser.Photograph,
+                Type = newUser.Type
             }); 
 
             await _context.SaveChangesAsync();
@@ -69,7 +70,7 @@ namespace PersonalBlog.src.repositories.implementations
         public async Task<List<UserModel>> GetUserByNameAsync(string name)
         {
             return await _context.Users
-                .Where(u => u.Name == name)
+                .Where(u => u.Name.Contains(name))
                 .ToListAsync();
         }
 

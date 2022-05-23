@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 namespace PersonalBlog.src.models
 {
     /// <summary>
-    /// <para>Resumo: Classe responsavel por representar tb_usuarios no banco.</para>
+    /// <para>Resumo: Class responsible for representing tb_users in the database.</para>
     /// <para>Criado por: Murilo Gama</para>
     /// <para>Versão: 1.0</para>
     /// <para>Data: 12/05/2022</para>

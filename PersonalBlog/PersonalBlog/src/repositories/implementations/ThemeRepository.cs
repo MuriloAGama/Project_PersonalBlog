@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace PersonalBlog.src.repositories.implementations
 {
+    /// <summary>
+    /// <para>Resumo: Class responsible for implementing ITema</para>
+    /// <para>Criado por: Gustavo Boaz</para>
+    /// <para>Versão: 1.0</para>
+    /// <para>Data: 12/05/2022</para>
+    /// </summary>
     public class ThemeRepository : ITheme
     {
 
@@ -25,7 +31,12 @@ namespace PersonalBlog.src.repositories.implementations
 
         #endregion Constructor
 
-        #region Method
+        #region Methods
+
+        /// <summary>
+        /// <para>Resumo: Asynchronous method to save a new theme</para>
+        /// </summary>
+        /// <param name="newTheme">NovoTemaDTO</param>
         public async Task AddThemeAsync(NewThemeDTO newTheme)
         {
             await _context.Themes.AddAsync(new ThemeModel
@@ -37,15 +48,23 @@ namespace PersonalBlog.src.repositories.implementations
             await _context.SaveChangesAsync();
         }
 
-        public async Task AttThemeAsync(UpdateThemeDTO newTheme)
+        /// <summary>
+        /// <para>Resumo: Asynchronous method to update a theme</para>
+        /// </summary>
+        /// <param name="Theme">UpdateThemeDTO</param>
+        public async Task AttThemeAsync(UpdateThemeDTO Theme)
         {
-            var existingTheme = await GetThemeByIdAsync(newTheme.Id);
-            existingTheme.Description = newTheme.Description;
+            var existingTheme = await GetThemeByIdAsync(Theme.Id);
+            existingTheme.Description = Theme.Description;
             _context.Themes.Update(existingTheme);
             await _context.SaveChangesAsync();
 
         }
 
+        /// <summary>
+        /// <para>Resumo: Asynchronous method to delete a theme</para>
+        /// </summary>
+        /// <param name="id">Id do tema</param>
         public async Task DeleteThemeAsync(int id)
         {
             _context.Themes.Remove(await GetThemeByIdAsync(id));
@@ -53,12 +72,21 @@ namespace PersonalBlog.src.repositories.implementations
 
         }
 
+        /// <summary>
+        /// <para>Resumo: Asynchronous method to get all themes</para>
+        /// </summary>
+        /// <return>Lista TemaModelo</return>
         public async Task<List<ThemeModel>> GetAllThemesAsync()
         {
             return await _context.Themes
                     .ToListAsync();
         }
 
+        /// <summary>
+        /// <para>Resumo: Asynchronous method to get themes by description</para>
+        /// </summary>
+        /// <param name="description">Descrição do tema</param>
+        /// <return>Lista TemaModelo</return>
         public async Task<List<ThemeModel>> GetThemeByDescriptionAsync(string description)
         {
             return await _context.Themes
@@ -71,8 +99,9 @@ namespace PersonalBlog.src.repositories.implementations
             return await _context.Themes.FirstOrDefaultAsync(p => p.Id == id);
 
         }
+
+        #endregion Method
     }
 
-    #endregion Method
 }
 

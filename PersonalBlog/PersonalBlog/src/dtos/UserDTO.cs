@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PersonalBlog.src.dtos
 {
     /// <summary>
-    /// <para>Resumo: Classe espelho para criar um novo usuario</para>
+    /// <para>Resumo: Mirror class to create a new user</para>
     /// <para>Criado por: Murilo Gama</para>
     /// <para>Versão: 1.0</para>
     /// <para>Data: 29/04/2022</para>
@@ -37,7 +37,7 @@ namespace PersonalBlog.src.dtos
     }
 
     /// <summary>
-    /// <para>Resumo: Classe espelho para atualizar um usuario</para>
+    /// <para>Resumo: Mirror class to update a user </para>
     /// <para>Criado por: Murilo Gama</para>
     /// <para>Versão: 1.0</para>
     /// <para>Data: 29/04/2022</para>

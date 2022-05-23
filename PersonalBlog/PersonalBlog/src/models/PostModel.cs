@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace PersonalBlog.src.models
 {
     /// <summary>
-    /// <para>Resumo: Classe responsavel por representar tb_postagens no banco.</para>
+    /// <para>Resumo: Class responsible for representing tb_posts in the database.</para>
     /// <para>Criado por: Gustavo Boaz</para>
     /// <para>Versão: 1.0</para>
     /// <para>Data: 12/05/2022</para>

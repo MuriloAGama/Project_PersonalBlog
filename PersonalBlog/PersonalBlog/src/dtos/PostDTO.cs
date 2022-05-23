@@ -3,7 +3,7 @@
 namespace PersonalBlog.src.dtos
 {
     /// <summary>
-    /// <para>Resumo: Classe espelho para criar uma nova postagem</para>
+    /// <para>Resumo: Mirror class to create a new post</para>
     /// <para>Criado por: Murilo Gama</para>
     /// <para>Versão: 1.0</para>
     /// <para>Data: 29/04/2022</para>
@@ -36,7 +36,7 @@ namespace PersonalBlog.src.dtos
     }
 
     /// <summary>
-    /// <para>Resumo: Classe espelho para atualizar uma postagem</para>
+    /// <para>Resumo: Mirror class to update a new post</para>
     /// <para>Criado por: Murilo Gama</para>
     /// <para>Versão: 1.0</para>
     /// <para>Data: 29/04/2022</para>

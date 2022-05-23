@@ -4,10 +4,9 @@ namespace PersonalBlog.src.utilities
 {
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
-
     public enum TypeUser
     {
-        Commom,
+        Common,
         Administrator
     }
 }

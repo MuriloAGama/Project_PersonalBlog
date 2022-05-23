@@ -3,7 +3,7 @@
 namespace PersonalBlog.src.dtos
 {
     /// <summary>
-    /// <para>Resumo: Classe espelho para criar um novo tema</para>
+    /// <para>Resumo: Mirror class to create a new theme</para>
     /// <para>Criado por: Murilo Gama</para>
     /// <para>Versão: 1.0</para>
     /// <para>Data: 29/04/2022</para>
@@ -20,7 +20,7 @@ namespace PersonalBlog.src.dtos
     }
 
     /// <summary>
-    /// <para>Resumo: Classe espelho para alterar um tema</para>
+    /// <para>Resumo: Mirror class to change a theme</para>
     /// <para>Criado por: Murilo Gama</para>
     /// <para>Versão: 1.0</para>
     /// <para>Data: 29/04/2022</para>

@@ -14,10 +14,9 @@ namespace PersonalBlog.src.repositories
 
     public interface IUser
     {
-        Task AddUserAsync(NewUserDTO newUsuario);
-        Task AttUserAsync(UpdateUserDTO UpdateUsuario);
+        Task AddUserAsync(NewUserDTO newUser);
+        Task AttUserAsync(UpdateUserDTO UpdateUser);
         Task DeleteUserAsync(int id);
-
         Task<UserModel> GetUserByIdAsync(int id);
         Task<UserModel> GetUserByEmailAsync(string email);
         Task<List<UserModel>> GetUserByNameAsync(string name);

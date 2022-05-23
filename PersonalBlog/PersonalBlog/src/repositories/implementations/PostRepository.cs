@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace PersonalBlog.src.repositories.implementations
 {
     /// <summary>
-    /// <para>Resumo: Classe responsavel por implementar IPostagem</para>
+    /// <para>Resumo: Class responsible for implementing IPost</para>
     /// <para>Criado por: Murilo Gama</para>
     /// <para>Versão: 1.0</para>
     /// <para>Data: 12/05/2022</para>
@@ -34,10 +34,10 @@ namespace PersonalBlog.src.repositories.implementations
         #region Methods
 
         /// <summary>
-        /// <para>Resumo: Método assíncrono para atualizar uma postagem</para>
+        /// <para>Resumo: Asynchronous method to update a post</para>
         /// </summary>
-        /// <param name="post">AtualizarPostagemDTO</param>
-        
+        /// <param name="post">UpdatePostDTO</param>
+
         public async Task AttPostAsync(UpDatePostDTO post)
         {
             var existingPost = await GetPostByIdAsync(post.Id);
@@ -47,26 +47,26 @@ namespace PersonalBlog.src.repositories.implementations
             existingPost.Theme = _context.Themes.FirstOrDefault(
             t => t.Description == post.ThemeDescription);
 
-             _context.Posts.Update(existingPost);
+            _context.Posts.Update(existingPost);
             await _context.SaveChangesAsync();
         }
 
         /// <summary>
-        /// <para>Resumo: Método assíncrono para deletar uma postagem</para>
+        /// <para>Resumo: Asynchronous method to delete a post</para>
         /// </summary>
-        /// <param name="id">Id da postagem</param>
+        /// <param name="id">Id of post</param>
         /// 
         public async Task DeletePostAsync(int id)
         {
-             _context.Posts.Remove(await GetPostByIdAsync(id));
+            _context.Posts.Remove(await GetPostByIdAsync(id));
             await _context.SaveChangesAsync();
 
         }
 
         /// <summary>
-        /// <para>Resumo: Método assíncrono para pegar todas postagens</para>
+        /// <para>Resumo: Asynchronous method to get all posts</para>
         /// </summary>
-        /// <return>Lista PostagemModelo></return>
+        /// <return>List PostModel></return>
         public async Task<List<PostModel>> GetAllPostsAsync()
         {
             return await _context.Posts
@@ -77,18 +77,21 @@ namespace PersonalBlog.src.repositories.implementations
         }
 
         /// <summary>
-        /// <para>Resumo: Método assíncrono para pegar uma postagem pelo Id</para>
+        /// <para>Resumo: Asynchronous method to get a post by Id</para>
         /// </summary>
-        /// <param name="id">Id da postagem</param>
-        /// <return>PostagemModelo</return>
+        /// <param name="id">Id of post</param>
+        /// <return>PostModel</return>
         public async Task<PostModel> GetPostByIdAsync(int id)
         {
-            return await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
+            return await _context.Posts
+            .Include(p => p.Creator)
+            .Include(p => p.Theme)
+            .FirstOrDefaultAsync(p => p.Id == id);
 
         }
 
         /// <summary>
-        /// <para>Resumo: Método assíncrono para pegar pegar postagens por pesquisa</para>
+        /// <para>Resumo: Asynchronous method to get fetch posts by search</para>
         /// </summary>
         /// <param name="title">Post title </param>
         /// <param name="themeDescription">Theme Description</param>
@@ -156,10 +159,10 @@ namespace PersonalBlog.src.repositories.implementations
 
 
         /// <summary>
-        /// <para>Resumo: Método assíncrono para salvar uma nova postagem</para>
+        /// <para>Resumo: Asynchronous method to save a new post</para>
         /// </summary>
         /// <param name="post">NewPostDTO</param>
-        public async Task NewPostAsync (NewPostDTO post)
+        public async Task NewPostAsync(NewPostDTO post)
         {
             await _context.Posts.AddAsync(new PostModel
             {
@@ -169,7 +172,7 @@ namespace PersonalBlog.src.repositories.implementations
                 Creator = _context.Users.FirstOrDefault(u => u.Email == post.EmailCreator),
                 Theme = _context.Themes.FirstOrDefault(t => t.Description == post.ThemeDescription)
             });
-           await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         #endregion Methods

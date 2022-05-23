@@ -9,18 +9,18 @@ using PersonalBlog.src.services;
 namespace BlogPessoal.src.controladores
 {
     [ApiController]
-    [Route("api/Autenticacao")]
+    [Route("api/Authentication")]
     [Produces("application/json")]
     public class AuthenticationController : ControllerBase
     {
-        #region Atributos
+        #region Attribute
 
         private readonly IAuthentication _services;
 
         #endregion
 
 
-        #region Construtores
+        #region Constructor
 
         public AuthenticationController(IAuthentication services)
         {
@@ -30,27 +30,27 @@ namespace BlogPessoal.src.controladores
         #endregion
 
 
-        #region Métodos
+        #region Methods
 
         /// <summary>
-        /// Pegar Autorização
+        /// Get Authorization
         /// </summary>
         /// <param name="authentication">AuthenticationDTO</param>
         /// <returns>ActionResult</returns>
         /// <remarks>
         /// Exemplo de requisição:
         ///
-        ///     POST /api/Autenticacao
+        ///     POST /api/Authentication
         ///     {
         ///        "email": "gustavo@domain.com",
         ///        "senha": "134652"
         ///     }
         ///
         /// </remarks>
-        /// <response code="201">Retorna usuario criado</response>
-        /// <response code="400">Erro na requisição</response>
-        /// <response code="401">E-mail ou senha invalido</response>
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AuthenticationDTO))]
+        /// <response code="201">Return user created</response>
+        /// <response code="400">request error</response>
+        /// <response code="401">E-mail or invalid password</response>
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AuthorizationDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPost]

@@ -14,9 +14,8 @@ namespace PersonalBlog.src.repositories
     public interface ITheme
     {
             Task AddThemeAsync(NewThemeDTO newTheme);
-            Task AttThemeAsync(UpdateThemeDTO newTheme);
+            Task AttThemeAsync(UpdateThemeDTO theme);
             Task DeleteThemeAsync(int id);
-
             Task<ThemeModel> GetThemeByIdAsync(int id);
             Task<List<ThemeModel>> GetThemeByDescriptionAsync(string description);
             Task<List<ThemeModel>> GetAllThemesAsync();

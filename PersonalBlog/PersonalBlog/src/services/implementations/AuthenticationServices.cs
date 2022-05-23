@@ -29,6 +29,12 @@ namespace PersonalBlog.src.servicos.implementations
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// <para>Resumo: Método responsavel por criptografar senha</para>
+        /// </summary>
+        /// <param name="password">Senha a ser criptografada</param>
+        /// <returns>string</returns>
         public string EncodePassword(string password)
         {
 
@@ -37,22 +43,33 @@ namespace PersonalBlog.src.servicos.implementations
 
         }
 
+        /// <summary>
+        /// <para>Resumo: Método assíncrono responsavel por criar usuario sem duplicar no banco</para>
+        /// </summary>
+        /// <param name="dto">NovoUsuarioDTO</param>
         public async Task CreateUserNotDuplicateAsync(NewUserDTO dto)
         {
 
             var user = await _repository.GetUserByEmailAsync(dto.Email);
+
             if (user != null) throw new Exception("This email is already being used");
+
             dto.Password = EncodePassword(dto.Password);
+
             await _repository.AddUserAsync(dto);
         }
 
 
-
+        /// <summary>
+        /// <para>Resumo: Método responsavel por gerar token JWT</para>
+        /// </summary>
+        /// <param name="user">UsuarioModelo</param>
+        /// <returns>string</returns>
         public string GenerateToken(UserModel user)
         {
             var tokenManipulator = new JwtSecurityTokenHandler();
-            var chave = Encoding.ASCII.GetBytes(Configuration["Settings:Secret"]);
-            var tokenDescricao = new SecurityTokenDescriptor
+            var key = Encoding.ASCII.GetBytes(Configuration["Settings:Secret"]);
+            var tokenDescription = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(
             new Claim[]
@@ -62,14 +79,21 @@ namespace PersonalBlog.src.servicos.implementations
             }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(
-            new SymmetricSecurityKey(chave),
+            new SymmetricSecurityKey(key),
             SecurityAlgorithms.HmacSha256Signature
             )
             };
-            var token = tokenManipulator.CreateToken(tokenDescricao);
+            var token = tokenManipulator.CreateToken(tokenDescription);
             return tokenManipulator.WriteToken(token);
         }
 
+        /// <summary>
+        /// <para>Resumo: Método assíncrono responsavel devolver autorização para usuario autenticado</para>
+        /// </summary>
+        /// <param name="authentication">AutenticarDTO</param>
+        /// <returns>AutorizacaoDTO</returns>
+        /// <exception cref="Exception">Usuário não encontrado</exception>
+        /// <exception cref="Exception">Senha incorreta</exception>
         public async Task <AuthorizationDTO> GetAuthorizationAsync(AuthenticationDTO authentication)
         {
             var user = await _repository.GetUserByEmailAsync(authentication.Email);
